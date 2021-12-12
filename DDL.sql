@@ -119,7 +119,7 @@ CREATE OR REPLACE FUNCTION buy_books() returns trigger as
 	begin
 		UPDATE book 
 		SET order_more = TRUE
-		WHERE new.stock < 10;
+		WHERE stock < 11;
 	RETURN new;
 	end;
 	$$
@@ -128,7 +128,7 @@ language 'plpgsql';
 CREATE TRIGGER book_order
 	AFTER UPDATE OF stock ON book
 	FOR EACH ROW
-	WHEN (new.stock < 10)
+	WHEN (new.stock < 11)
 	EXECUTE PROCEDURE buy_books();
 	
 
@@ -299,10 +299,3 @@ VALUES ('user',1234432112344321, 111, 2021-12, 'Billy', 'Bob', 'K1J5L3');
 
 INSERT INTO shipping_info
 VALUES ('user','Canada','Ontario','Ottawa','12 real avenue', 'K1J6L2');
-
-
-
-
-
-
-
