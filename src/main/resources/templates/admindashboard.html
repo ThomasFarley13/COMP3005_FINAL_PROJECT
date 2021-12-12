@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel ="stylesheet" href="custom.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<form action="/logout" th:action="@{/logout}"  method="post" >
+    <input type="submit" class="btn btn-primary" value="Logout" style="float:right; right: 5;"/>
+</form>
+<div class ="center">
+    <h1 >
+        <span th:text=" 'Welcome to the Look Inna Book bookstore ' + ${user.username} + '!'"><br></span>
+    </h1>
+</div>
+
+<div class = "center">
+    <h4>&nbsp;What we have to offer:</h4>
+    <ul>
+        <li><a th:href="@{/browse}">Browse our book options</a></li>
+        <li><a th:href="@{/orderCheck}">Track an order</a></li>
+        <li><a th:href="@{/manage}">Manage book collection</a></li>
+        <li><a th:href="@{/reports}">Reports</a></li>
+    </ul>
+</div>
+
+</body>
+</html>

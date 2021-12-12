@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel ="stylesheet" href="custom.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Billing and Shipping information</title>
+</head>
+<form action="/logout" th:action="@{/logout}"  method="post" >
+    <input type="submit" class="btn btn-primary" value="Logout" style="float:right; right: 5;"/>
+</form>
+<div class ="center">
+    <h1 >
+        <span th:text=" 'Welcome to the Look Inna Book bookstore ' + ${user.username} + '!'"><br></span>
+    </h1>
+</div>
+<body>
+<form class="center" th:action="@{/createOrder}"  method="post">
+    <h2>Billing information</h2>
+    <p>Enter your credit card number:</p>
+    <input  type="text" name = "credit_card" id="credit_card"   placeholder="Credit Card Number" data-fv-username-message="Please enter a valid number" required>
+    <p>Enter the card's CCV</p>
+    <input  type="text" name="ccv"  placeholder="ccv" data-fv-password-message="Please enter a valid CCV" required >
+    <p>Enter the card's expiration date</p>
+    <input type="month" name="date" min="2021-12" max="2025-12">
+    <p>Please enter your first name</p>
+    <input type="text" name="firstname" placeholder="First Name" data-fv-firstname-message="Please enter a valid first name" required>
+    <p>Please enter your last name</p>
+    <input  type="text" name="lastname" placeholder="Last Name" data-fv-lastname-message="Please enter a valid last name" required >
+    <p>Enter your postal code</p>
+    <input  type="text" name="postal_code1"  placeholder="Postal code" data-fv-password-message="Please enter a valid postal code" required >
+    <br>
+    <br>
+    <h2>Shipping information</h2>
+    <p>Enter your country:</p>
+    <input  type="text" name = "country"   placeholder="Country" data-fv-username-message="Please enter a valid country" required>
+    <p>Enter your state/province</p>
+    <input  type="text" name="state_province"  placeholder="State or province" data-fv-password-message="Please enter a valid state or province" required >
+    <p>Enter your city:</p>
+    <input  type="text" name = "city"   placeholder="City" data-fv-username-message="Please enter a valid city" required>
+    <p>Enter your address</p>
+    <input  type="text" name = "address"   placeholder="Address" data-fv-username-message="Please enter a valid address" required>
+    <p>Enter your postal code</p>
+    <input  type="text" name="postal_code2"  placeholder="Postal code" data-fv-password-message="Please enter a valid postal code" required >
+    <br>
+    <br>
+    <input type="submit"  value="Complete Order">
+</form>
+
+</body>
+</html>

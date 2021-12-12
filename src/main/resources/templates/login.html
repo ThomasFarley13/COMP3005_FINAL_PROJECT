@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+
+<link rel ="stylesheet" href="custom.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
+<div class ="center">
+    <h1>Welcome to the Look Inna Book bookstore!&nbsp;</h1>
+</div>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <form action="/login" th:action="@{/login}"  method="post">
+            <input type="text" id="username" name="username"  placeholder="login"  th:value="${username}">
+            <input type="password" id="passwd" name ="passwd" placeholder="password" th:value="${passwd}">
+            <input type="submit" value="Log In">
+        </form>
+
+    </div>
+</div>
+</body>
+
+</html>

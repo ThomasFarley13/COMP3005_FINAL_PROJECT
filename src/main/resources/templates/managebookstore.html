@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel ="stylesheet" href="custom.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Bookstore</title>
+</head>
+<body  >
+<form action="/logout" th:action="@{/logout}"  method="post" >
+    <input type="submit" class="btn btn-primary" value="Logout" style="float:right; right: 5;"/>
+</form>
+<div class ="center">
+    <h1 >
+        <span th:text=" 'Welcome to the Look Inna Book bookstore ' + ${user.username} + '!'"><br></span>
+    </h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h1 style="font-family:arvo; border-bottom:thick solid #ff0000;">
+                Look Inna Book management of available books
+            </h1>
+            <h3>
+                Add a book
+            </h3>
+            <form id="addform" th:action="@{/addbook}" method="post" >
+                <div class="row">
+                    <div class="col">
+                        <h5>Title: </h5>
+                        <br>
+                        <input name="title" type="text" th:value="${title}" placeholder="Title">
+                    </div>
+                    <div class="col">
+                        <h5>Author Name: </h5>
+                        <p style="font-size: 10px">Please write name as Firstname,Lastname</p>
+                        <input name="author" type="text" th:value="${author}" placeholder="Author">
+                    </div>
+                    <div class="col" >
+                        <h5>Genre: </h5>
+                        <br>
+                        <select name="genre" th:value="${genre}">
+                            <option  th:each="gen : ${genres}" th:value="${gen}" th:text="${gen}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col" >
+                        <h5>ISBN: </h5>
+                        <br>
+                        <input name="isbn" type="text" th:value="${isbn}" placeholder="ISBN">
+                    </div>
+                    <div class="col" >
+                        <h5>Page length: </h5>
+                        <br>
+                        <input name="page_length" type="text" th:value="${page_length}" placeholder="Page Length">
+                    </div>
+                    <div class="col" >
+                        <h5>Purchase cost: </h5>
+                        <br>
+                        <input name="purchase_cost" type="text" th:value="${purchase_cost}" placeholder="Purchase Cost">
+                    </div>
+                    <div class="col" >
+                        <h5>Publisher: </h5>
+                        <br>
+                        <select name="publisher" th:value="${publisher}">
+                            <option  th:each="pub : ${publishers}" th:value="${pub}" th:text="${pub}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col" >
+                        <h5>Publisher Cut: </h5>
+                        <br>
+                        <input name="publisher_cut" type="text" th:value="${publisher_cut}" placeholder="Publisher Cut">
+                    </div>
+                    <div class="col" >
+                        <h5>Stock: </h5>
+                        <br>
+                        <input name="stock" type="text" th:value="${stock}" placeholder="Stock">
+                    </div>
+                    <div class="col" >
+                        <h5>Stock Cost: </h5>
+                        <br>
+                        <input name="stock_cost" type="text" th:value="${stock_cost}" placeholder="Stock Cost">
+                    </div>
+                    <div class="col" >
+                        <h5>Add a sale: </h5>
+                        <br>
+                        <input name="sale" type="text" th:value="${sale}" placeholder="Sale">
+                    </div>
+                </div>
+                <div class="row" style="padding-left:2%; padding-top:3%">
+                    <input type="submit" value="Add book"></input>
+                </div>
+
+            </form>
+
+            <h3>
+                Search for a book to remove
+            </h3>
+            <form id="myform" th:action="@{/searchBooks}" method="get" >
+            <div class="row">
+                <div class="col">
+                    <h5>Title: </h5>
+                    <br>
+                    <input name="title" type="text" th:value="${title}" placeholder="Title">
+                </div>
+                <div class="col">
+                    <h5>Author Name: </h5>
+                    <p style="font-size: 10px">Please write name as Firstname,Lastname</p>
+                    <input name="author" type="text" th:value="${author}" placeholder="Author">
+                </div>
+                <div class="col-sm-2" >
+                    <h5>Genre: </h5>
+                    <br>
+                    <select name="genre" th:value="${genre}">
+                        <option value="any" text="any">any</option>
+                        <option  th:each="gen : ${genres}" th:value="${gen}" th:text="${gen}">
+                        </option>
+                    </select>
+                </div>
+                <div class="col-lg-5" >
+                    <h5>ISBN: </h5>
+                    <br>
+                    <input name="isbn" type="text" th:value="${isbn}" placeholder="ISBN">
+                </div>
+
+            </div>
+            <div class="row" style="padding-left:2%; padding-top:3%">
+                <input type="submit" value="Search"></input>
+            </div>
+
+            </form>
+            <div id = "resultBox" hidden = true>
+                <h2>Book List</h2>
+                <table id = "results" class="table table-striped">
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Genre</th>
+                        <th>ISBN</th>
+                        <th>Page Count</th>
+                        <th>Cost</th>
+                        <th>Publisher</th>
+                        <th>Stock</th>
+                        <th>Sale</th>
+                        <th>Remove book from store</th>
+                    </tr>
+                </table>
+            </div>
+            <div id="noResults" hidden = true >There were no books matching your search</div>
+        </div>
+    </div>
+</div>
+<script>
+$(function() {
+    $("#addform").on("submit", function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr("action"),
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    });
+});
+
+$(function() {
+    $("#myform").on("submit", function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr("action"),
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                var table = document.getElementById("results");
+                $("#results").find("tr:not(:first)").remove();
+                if(Object.keys(data).length === 0){
+                    document.getElementById("resultBox").hidden = true;
+                    document.getElementById("noResults").hidden = false;
+
+                }
+                else {
+                    document.getElementById("noResults").hidden = true;
+                    document.getElementById("resultBox").hidden = false;
+                    for(var key in data) {
+                        var row = table.insertRow(1);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        var cell5 = row.insertCell(4);
+                        var cell6 = row.insertCell(5);
+                        var cell7 = row.insertCell(6);
+                        var cell8 = row.insertCell(7);
+                        var cell9 = row.insertCell(8);
+
+                        cell1.innerHTML = data[key].title;
+                        cell2.innerHTML = data[key].author;
+                        cell3.innerHTML = data[key].genre;
+                        cell4.innerHTML = data[key].isbn;
+                        cell5.innerHTML = data[key].page_length;
+                        cell6.innerHTML = data[key].purchase_cost;
+                        cell7.innerHTML = data[key].publisher_name;
+                        cell8.innerHTML = data[key].stock;
+                        cell9.innerHTML = data[key].sale;
+                    }
+
+                    console.log(document.getElementById('results').getElementsByTagName('tr').length);
+                    for(var i = document.getElementById('results').getElementsByTagName('tr').length-1; i > 0; i-=1) {
+                        var row = document.getElementById('results').getElementsByTagName('tr')[i];
+                        var columns = row.getElementsByTagName('td');
+                        var cell10 = row.insertCell(9);
+                        var button = document.createElement('button');
+                            button.value = i;
+                            button.setAttribute("onClick", "javascript: myFunction(this.value);");
+                        button.innerHTML = "Remove";
+                        cell10.appendChild(button);
+                    }
+                }
+            }
+        });
+    });
+});
+function myFunction(value) {
+        console.log(value);
+        var row = document.getElementById('results').getElementsByTagName('tr')[value];
+        var columns = row.getElementsByTagName('td');
+        $.ajax({
+            url: "http://localhost:8080/manage",
+            type: 'POST',
+            data: {
+                  isbn: columns[3].innerHTML
+                },
+            success: function(data) {
+                console.log(data);
+                document.getElementById('results').deleteRow(value);
+            },
+            error: function(result) {
+                alert('error');
+            }
+        });
+};
+        </script>
+</body>
+</html>
