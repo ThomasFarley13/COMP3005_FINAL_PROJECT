@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AuthorRepository extends CrudRepository<Author, Long> {
 
-    //basic select clause by id
+    //equivalent to SQL query "SELECT * FROM author WHERE id = :id ;
     Author findById(String id);
 
 

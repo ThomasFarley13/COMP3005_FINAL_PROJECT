@@ -110,7 +110,7 @@
                         data: $(this).serialize(),
                         dataType: 'json',
                         success: function(data) {
-                            console.log(data);
+
                             var table = document.getElementById("results");
                             $("#results").find("tr:not(:first)").remove();
                             if(Object.keys(data).length === 0){
@@ -152,7 +152,7 @@
 
                                 }
 
-                                console.log(document.getElementById('results').getElementsByTagName('tr').length);
+
                                 for(var i = document.getElementById('results').getElementsByTagName('tr').length-1; i > 0; i-=1) {
                                     var row = document.getElementById('results').getElementsByTagName('tr')[i];
                                     var columns = row.getElementsByTagName('td');
@@ -169,7 +169,7 @@
                 });
             });
             function myFunction(value) {
-                    console.log(value);
+
                     var row = document.getElementById('results').getElementsByTagName('tr')[value];
                     var columns = row.getElementsByTagName('td');
                     var basket = document.getElementById("selectedBooks");

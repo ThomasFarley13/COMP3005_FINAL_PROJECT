@@ -90,7 +90,7 @@ public class BookstoreController {
 
         Users loginUser = userRepo.findByUsernameAndPasswd(username, passwd);
 
-        System.out.println(loginUser);
+
         if (loginUser != null) {
             model.addAttribute(user);
 
@@ -136,7 +136,7 @@ public class BookstoreController {
         model.addAttribute("user", user);
         List<String> genres = bookRepo.findAllGenres();
         model.addAttribute("genres", genres);
-        System.out.println(genres);
+
         return "bookstore";
     }
 
@@ -179,8 +179,7 @@ public class BookstoreController {
             List<Book> search2 = new ArrayList<Book>();
             String[] authorName = author.split(",");
             for (Book book : search) {
-                System.out.println(Arrays.toString(authorName));
-                System.out.println(Arrays.toString(bookRepo.getAuthor(book.getIsbn())));
+
                 if (author.equals(bookRepo.getAuthor(book.getIsbn())[0])) {
                     search2.add(book);
                 }
@@ -257,17 +256,17 @@ public class BookstoreController {
 
         int totalCost = 0;
         for (String book : books) {
+
             Book currentBook = bookRepo.findByIsbn(Long.parseLong(book)).get(0);
             //updates the total cost
             totalCost += currentBook.getPurchase_cost();
             //simulates sending an email if we have less than 10 books in stock
-            if (currentBook.isOrder_more()) {
-                System.out.println("Sending email to publisher to order more novels with isbn " + currentBook.getIsbn());
-                bookRepo.updateStock(currentBook.getIsbn(), 10);
-                currentBook.setOrder_more(false);
-            }
             if (currentBook.getStock() > 0) {
                 bookRepo.updateStock(currentBook.getIsbn(), -1);
+            }
+            if (currentBook.isOrder_more()) {
+                System.out.println("Sending email to publisher to order more novels at email " + pubRepo.findPublisherEmail(currentBook.getPublisher_name()) + " for isbn " + currentBook.getIsbn());
+                bookRepo.updateStock(currentBook.getIsbn(), 10);
             }
 
             Holds hold = holdRepo.findByBasketIdAndIsbn(basketId, Long.parseLong(book));

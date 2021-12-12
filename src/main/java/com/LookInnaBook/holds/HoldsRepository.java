@@ -10,10 +10,10 @@ import java.util.List;
 
 public interface HoldsRepository extends CrudRepository<Holds, Long> {
 
-    //finds all holds relationships for a basket
+    //finds all holds relationships for a basket "SELECT * FROM holds WHERE basket_id = :basket_id"
     List<Holds> findByBasketId(int basket_id);
 
-    //finds a holds relationship for a given id and book
+    //finds a holds relationship for a given id and book "SELECT * FROM holds WHERE basket_id = :basket_id AND isbn = :book"
     Holds findByBasketIdAndIsbn(int basketId, long book);
 
     //updates the number of books that are being held in the basket

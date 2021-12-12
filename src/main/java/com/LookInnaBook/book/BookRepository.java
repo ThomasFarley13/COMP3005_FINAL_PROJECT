@@ -12,29 +12,29 @@ import java.util.List;
 
 public interface BookRepository extends CrudRepository<Book, Long> {
 
-    //query to find all books by title
+    //query to find all books by title "SELECT title FROM Book"
     List<Book> findByTitle(String title);
 
     //query to find all distinct genres
     @Query("SELECT DISTINCT genre FROM Book")
     List<String> findAllGenres();
 
-    //query to find books by title genre and isbn
+    //query to find books by title genre and isbn "SELECT * FROM Book WHERE title = :title AND genre = :genre AND isbn = :isbn"
     List<Book> findByTitleAndGenreAndIsbn(String title, String genre, long isbn);
 
-    //query to find books by title and genre
+    //query to find books by title and genre "SELECT * FROM Book WHERE title = :title AND genre = :genre "
     List<Book> findByTitleAndGenre(String title, String genre);
 
-    //query to find books by title and isbn
+    //query to find books by title and isbn "SELECT * FROM Book WHERE title = :title AND isbn = :isbn"
     List<Book> findByTitleAndIsbn(String title, long isbn);
 
-    //query to find books by genre and isbn
+    //query to find books by genre and isbn "SELECT * FROM Book WHERE genre = :genre AND isbn = :isbn"
     List<Book> findByGenreAndIsbn(String genre, long isbn);
 
-    //query to find books by genre
+    //query to find books by genre "SELECT * FROM Book WHERE genre = :genre "
     List<Book> findByGenre(String genre);
 
-    //query to find books by their isbn
+    //query to find books by their isbn "SELECT * FROM Book WHERE isbn = :isbn"
     List<Book> findByIsbn(long isbn);
 
     //returns the author attached to a book
@@ -52,6 +52,6 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     //updates the stock amount for a book
     @Modifying
     @Transactional
-    @Query("update Book b set b.stock = b.stock + :stock where b.isbn = :isbn ")
+    @Query("update Book b set b.stock = b.stock + :stock , b.order_more = 'false' where b.isbn = :isbn ")
     void updateStock(@Param("isbn") long isbn, @Param("stock") int stock);
 }

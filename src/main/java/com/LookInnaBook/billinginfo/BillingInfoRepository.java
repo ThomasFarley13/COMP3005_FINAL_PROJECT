@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface BillingInfoRepository extends CrudRepository<BillingInfo, Long> {
 
-    //basic search to find billing info by a username
+    //basic search to find billing info by a username "SELECT * FROM billing_info WHERE username = :username"
     BillingInfo findByUsername(String username);
 
     //inserts a new record into billing info for a user

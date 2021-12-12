@@ -55,7 +55,7 @@ $(function() {
             data: $(this).serialize(),
             dataType: 'json',
             success: function(data) {
-                console.log(data);
+
                 document.getElementById("resultBox").hidden = false;
                 var table = document.getElementById("results");
                 $("#results").find("tr").remove();

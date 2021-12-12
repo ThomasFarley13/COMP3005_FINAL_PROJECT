@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface ShippingInfoRepository extends CrudRepository<ShippingInfo, Long> {
 
-    //find shipping info for a user
+    //find shipping info for a user "SELECT * FROM shipping_info WHERE username = :username"
     ShippingInfo findByUsername(String username);
 
     //query to insert new shipping info for a user
